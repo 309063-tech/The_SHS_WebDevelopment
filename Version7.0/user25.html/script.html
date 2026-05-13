@@ -6,6 +6,8 @@
 -->
 
 <head>
+    	
+<script src="JS/SampleJS.js"></script>
     <title>JavaScript</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,6 +40,8 @@
 </head>
 
 <body>
+
+    
     <!---------------------------------- Begin the nav-bar ------------->
     <div class="menu">
         <nav class="navbar navbar-expand-md p-2 navbar-dark bg-dark">
@@ -67,6 +71,21 @@
     </div>
     <!---------------------------------- End the nav-bar ------------->
 
+
+
+
+
+<div class="row text-center">
+
+    <div class="col-md-12">
+        <h3 id="loadText">Waiting for page load...</h3>
+    </div>
+
+</div>
+
+
+
+
     <main class="m-3" id="content">
         <h1 class="text-left my-3">My JavaScript Examples</h1>
         <!-- Edit this line for the title of your page -->
@@ -79,15 +98,95 @@
             </div>
         </div>
     </main>
-    <!--↑↑↑↑↑↑↑↑↑↑ Make sure all your content is above this line ↑↑↑↑↑↑↑↑↑↑-->
 
 
-    <!---------------------------------- Begin the footer ------------->
-    <footer class="small text-center" id="footer">
-        <p>
-            Webpage made by <a href="index.html" target="_blank">[your name]</a>
+
+
+    <center><p id="textChange"> My name is User #25</p></center>
+<center><button type="button" onclick="changeText()">Click if you like</button></center>
+
+
+<div class="row text-center">
+
+    <div class="col-md-4">
+        <button onclick="showAlert()">ALERT</button>
+    </div>
+
+    <div class="col-md-4">
+        <p ondblclick="doubleClick()">
+            Double click me
         </p>
-    </footer>
+    </div>
+
+</div>
+
+
+
+
+<div class="row text-center">
+
+    <div class="col-md-6">
+        <p onmouseover="mouseOver()" onmouseout="mouseOut()" id="hoverText">
+            Hover over me
+        </p>
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="row text-center">
+
+    <div class="col-md-6">
+        <input type="text" onkeydown="keyPress()" placeholder="Type here">
+        <p id="keyText"></p>
+    </div>
+
+    <div class="col-md-6">
+        <input type="text" onchange="inputChange()" placeholder="Change me">
+        <p id="inputText"></p>
+    </div>
+
+</div>
+
+
+
+
+<body onmousedown="isKeyPressed(event)">
+
+<p>Click on this paragraph. An alert box will tell you if you pressed the shift key or not.</p>
+
+<p id="demo"></p>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!---------------------------------- End the footer ------------->
 </body>
 
