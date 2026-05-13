@@ -1,137 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>JavaScript Games</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>JavaScript Games</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        body{
-            text-align:center;
-            font-family:Arial;
-            background:#f4f4f4;
-            margin:0;
-        }
-
-        header, footer{
-            background:#343a40;
-            color:white;
-            padding:20px;
-        }
-
-        section{
-            background:white;
-            width:80%;
-            margin:20px auto;
-            padding:20px;
-            border-radius:10px;
-        }
-
-        #box{
-            width:150px;
-            height:150px;
-            background:red;
-            margin:20px auto;
-            display:none;
-        }
-
-        #colorSquare{
-            width:200px;
-            height:200px;
-            background:blue;
-            margin:20px auto;
-        }
+        body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;text-align:center}
+        header,footer{background:#343a40;color:#fff;padding:20px}
+        section{background:#fff;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,.1);padding:20px;margin-bottom:20px}
+        #box{width:150px;height:150px;background:red;margin:20px auto;display:none;cursor:pointer}
+        #colorSquare{width:200px;height:200px;background:blue;margin:20px auto}
     </style>
 </head>
-
 <body>
-
-<header>
+<header class="container">
     <h1>JavaScript Games</h1>
     <p>Simple Interactive Webpage</p>
 </header>
 
-<section>
-    <h2>Reaction Game</h2>
-    <button onclick="startGame()" class="btn btn-success">Start</button>
-    <div id="box" onclick="stopGame()"></div>
-    <h3 id="result"></h3>
-</section>
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <section>
+                <h2>Reaction Game</h2>
+                <button id="startBtn" class="btn btn-success mb-2">Start</button>
+                <div id="box"></div>
+                <h3 id="result">Click start</h3>
+            </section>
+        </div>
+    </div>
 
-<section>
-    <h2>Color Changer</h2>
-    <div id="colorSquare"></div>
-    <button onclick="changeColor()" class="btn btn-primary">Change Color</button>
-</section>
+    <div class="row">
+        <div class="col-12">
+            <section>
+                <h2>Color Changer</h2>
+                <div id="colorSquare"></div>
+                <button id="colorBtn" class="btn btn-primary">Change Color</button>
+            </section>
+        </div>
+    </div>
 
-<section>
-    <h2>Counter Game</h2>
-    <h1 id="score">0</h1>
-    <button onclick="addScore()" class="btn btn-danger">Add Point</button>
-    <button onclick="resetScore()" class="btn btn-dark">Reset</button>
-</section>
+    <div class="row">
+        <div class="col-12">
+            <section>
+                <h2>Counter Game</h2>
+                <h1 id="score">0</h1>
+                <button id="addBtn" class="btn btn-danger">Add Point</button>
+                <button id="resetBtn" class="btn btn-dark">Reset</button>
+            </section>
+        </div>
+    </div>
+</div>
 
-<footer>
+<footer class="container">
     <p>JavaScript Assignment</p>
 </footer>
 
 <script>
+window.addEventListener('load', () => alert('Welcome to my JavaScript Games!'))
 
-    // runs ONCE when page loads
-    window.onload = function(){
-        alert("Welcome to my JavaScript Games!");
-    };
+const box = document.getElementById('box')
+const result = document.getElementById('result')
+const scoreEl = document.getElementById('score')
+const colors = ['red', 'blue', 'green', 'purple', 'orange', 'pink']
 
-    // Reaction game
-    var startTime;
+let startTime = 0
+let score = 0
 
-    function startGame(){
-        document.getElementById("result").innerHTML = "Wait for the box...";
-        document.getElementById("box").style.display = "none";
+document.getElementById('startBtn').addEventListener('click', () => {
+    result.textContent = 'Wait for the box...'
+    box.style.display = 'none'
+    startTime = 0
+    setTimeout(() => {
+        box.style.display = 'block'
+        startTime = Date.now()
+    }, Math.random() * 3000)
+})
 
-        var time = Math.random() * 3000;
+box.addEventListener('click', () => {
+    if (!startTime) return
+    result.textContent = 'Your time: ' + ((Date.now() - startTime) / 1000).toFixed(3) + ' seconds'
+    box.style.display = 'none'
+    startTime = 0
+})
 
-        setTimeout(function(){
-            document.getElementById("box").style.display = "block";
-            startTime = new Date().getTime();
-        }, time);
-    }
+document.getElementById('colorBtn').addEventListener('click', () => {
+    document.getElementById('colorSquare').style.background =
+        colors[Math.floor(Math.random() * colors.length)]
+})
 
-    function stopGame(){
-        var endTime = new Date().getTime();
-        var reaction = (endTime - startTime) / 1000;
+document.getElementById('addBtn').addEventListener('click', () => {
+    score += 1
+    scoreEl.textContent = score
+})
 
-        document.getElementById("result").innerHTML =
-        "Your time: " + reaction + " seconds";
-
-        document.getElementById("box").style.display = "none";
-    }
-
-    // Color changer
-    function changeColor(){
-        var colors = ["red","blue","green","purple","orange","pink"];
-
-        var random = colors[Math.floor(Math.random() * colors.length)];
-
-        document.getElementById("colorSquare").style.background = random;
-    }
-
-    // Counter game
-    var score = 0;
-
-    function addScore(){
-        score = score + 1;
-        document.getElementById("score").innerHTML = score;
-    }
-
-    function resetScore(){
-        score = 0;
-        document.getElementById("score").innerHTML = score;
-    }
-
+document.getElementById('resetBtn').addEventListener('click', () => {
+    score = 0
+    scoreEl.textContent = score
+})
 </script>
-
 </body>
 </html>
